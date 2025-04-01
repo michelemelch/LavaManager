@@ -1,0 +1,186 @@
+/* Impostazioni globali */
+body {
+  background-color: #f4f7f8;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.App {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+h1, h2, h3 {
+  color: #333;
+}
+
+/* RecipeList e ProgramEditor */
+.recipe-list-container, .program-editor-container {
+  margin-top: 1rem;
+}
+
+.program-header {
+  margin-bottom: 1rem;
+}
+.program-header input {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Toolbar */
+.toolbar {
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.toolbar button {
+  margin: 0.3rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  background-color: #4CAF50;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.toolbar button:hover {
+  background-color: #45a049;
+}
+
+/* Editor area */
+.editor-area {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 1rem;
+  background-color: #fafafa;
+  min-height: 150px;
+}
+
+.step-item {
+  border-bottom: 1px solid #ddd;
+  padding: 0.5rem 0;
+  margin-bottom: 0.5rem;
+}
+
+.step-item:last-child {
+  border-bottom: none;
+}
+
+.step-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.step-parameters {
+  font-size: 0.9em;
+  color: #555;
+  margin-top: 0.5rem;
+}
+
+/* Program actions */
+.program-actions {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.program-actions button {
+  padding: 0.5rem 1rem;
+  border: none;
+  background-color: #2196F3;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.program-actions button:hover {
+  background-color: #0b7dda;
+}
+
+/* Table for RecipeList */
+.recipe-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.recipe-table th, .recipe-table td {
+  border: 1px solid #ddd;
+  padding: 0.5rem;
+  text-align: left;
+}
+
+.recipe-table th {
+  background-color: #f2f2f2;
+}
+
+/* Modal styling */
+.modal {
+  background-color: rgba(0, 0, 0, 0.3);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: white;
+  padding: 1rem;
+  border-radius: 8px;
+  min-width: 300px;
+}
+
+.modal-content h3 {
+  margin-top: 0;
+}
+
+.modal-actions {
+  margin-top: 1rem;
+  text-align: right;
+}
+
+.modal-actions button {
+  margin-left: 0.5rem;
+  padding: 0.4rem 0.8rem;
+  border: none;
+  background-color: #2196F3;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.modal-actions .cancel-btn {
+  background-color: #f44336;
+}
+
+.modal-actions button:hover {
+  opacity: 0.9;
+}
+
+.back-button {
+  margin-bottom: 1rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  background-color: #555;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.back-button:hover {
+  background-color: #333;
+}
