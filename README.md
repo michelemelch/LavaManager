@@ -366,3 +366,33 @@ Quando fornirai le specifiche, potremo definire insieme le tabelle, le migrazion
 Ottimizzare lo Sviluppo e il Deployment:
 Integrare strumenti di CI/CD, test automatizzati e ambienti di staging/produzione.
 Questa guida passo passo ti permette di ottenere rapidamente una configurazione “Hello World” che integra frontend, backend e database, containerizzata con Docker. Quando sarai pronto con le specifiche funzionali, potremo espandere ciascuna parte dell’applicazione. Se hai domande o necessiti ulteriori dettagli su uno dei passaggi, fammi sapere!
+
+
+
+
+
+Porta 5433 per PostgreSQL (internamente 5432, esposta sulla 5433)
+Porta 5001 per il backend (Node.js/Express)
+Frontend in React (servito su porta 3000 tramite un container Nginx in modalità production)
+L’applicazione sarà containerizzata con Docker e orchestrata tramite Docker Compose.
+
+1. Struttura del Progetto
+
+Crea una cartella principale, ad esempio:
+
+LavaManager/
+├── backend/                 
+│   ├── app.js              
+│   ├── package.json        
+│   └── Dockerfile          
+├── frontend/                
+│   ├── public/             
+│   ├── src/                
+│   │   ├── App.js          
+│   │   └── components/     
+│   │       └── ProgramEditor.js
+│   ├── package.json        
+│   └── Dockerfile          
+├── db-init/                 
+│   └── init.sql            # (opzionale: script per inizializzare il database)
+└── docker-compose.yml      
