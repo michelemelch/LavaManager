@@ -27,7 +27,7 @@ p {
   padding: 1rem;
 }
 .navbar-custom .navbar-brand {
-  color: white;
+  color: #fff;
   font-size: 1.5rem;
   font-weight: bold;
 }
@@ -39,7 +39,7 @@ p {
   padding: 0;
 }
 .navbar-custom ul li a {
-  color: white;
+  color: #fff;
   text-decoration: none;
   font-size: 1.1rem;
   padding: 0.5rem 1rem;
@@ -48,6 +48,90 @@ p {
 .navbar-custom ul li a:hover {
   background-color: rgb(36.0480349345, 150.5458515284, 243.9519650655);
   border-radius: 4px;
+}
+
+/* Container che copre l'intero viewport */
+.landing-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  width: 100%;
+  padding: 1rem;
+  background: linear-gradient(135deg, #eef1f5, #d3dde7);
+}
+
+/* Card centrale per il contenuto della landing page */
+.landing-card {
+  background-color: #fff;
+  padding: 2.5rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  width: 100%;
+  max-width: 480px;
+  margin: 1rem;
+  animation: fadeInUp 0.6s ease-out;
+}
+
+/* Container per il logo e il titolo */
+.logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+/* Stile per l'immagine del logo */
+.logo-container img {
+  width: 60px;
+  height: 60px;
+  margin-right: 0.5rem;
+}
+
+/* Stile per il titolo */
+.logo-container h1 {
+  font-size: 2rem;
+  margin: 0;
+  color: #2c3e50;
+}
+
+/* Stile per il paragrafo descrittivo */
+.landing-card p {
+  font-size: 1.1rem;
+  color: #555;
+  margin-bottom: 2rem;
+}
+
+/* Stile per il pulsante */
+.landing-card button {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  background-color: #2196F3;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  width: 100%;
+}
+
+.landing-card button:hover {
+  background-color: #1976d2;
+  transform: translateY(-2px);
+}
+
+/* Animazione di ingresso */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /*# sourceMappingURL=main.css.map */

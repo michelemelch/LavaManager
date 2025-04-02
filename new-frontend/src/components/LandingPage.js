@@ -1,52 +1,46 @@
 import React from 'react';
-import '../scss/landing.scss'; // Importa il file SCSS specifico per la landing page
+import NavBar from './NavBar';
+import '../scss/landing.scss'; // Assicurati che questo file importi i tuoi stili personalizzati
 
-const LandingPage = () => {
+const LandingPage = ({ onNavigate }) => {
   return (
     <div>
-      {/* Header con menù */}
-      <nav className="navbar navbar-expand-lg navbar-custom">
-        <div className="container">
-          <a className="navbar-brand" href="#">LavaManager</a>
-          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className="collapse navbar-collapse" id="navbarNav">
-            <ul className="navbar-nav ms-auto">
-              <li className="nav-item">
-                <a className="nav-link" href="#home">Home</a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#features">Caratteristiche</a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#contact">Contatti</a>
-              </li>
-            </ul>
+      <NavBar onNavigate={onNavigate} />
+      <section id="home" className="landing-section container mt-5">
+        <h1>Benvenuti in LavaManager</h1>
+        <p>
+          LavaManager è la soluzione completa per la gestione delle ricette di lavaggio per macchine industriali.
+        </p>
+        <div className="metrics my-4 row">
+          <div className="col-md-6 text-center">
+            <h3>Numero ricette Stone Wash</h3>
+            <p className="metric-value">0</p>
+          </div>
+          <div className="col-md-6 text-center">
+            <h3>Numero ricette Lavacentrifughe</h3>
+            <p className="metric-value">0</p>
           </div>
         </div>
-      </nav>
-
-      {/* Sezione principale della landing page */}
-      <section id="home" className="landing-section container">
-        <h1>Benvenuti in LavaManager</h1>
-        <p>La soluzione completa per la gestione delle ricette di lavaggio per macchine industriali.</p>
-        <button className="btn btn-primary">Scopri di più</button>
+        <button className="btn btn-primary" onClick={() => onNavigate('list')}>
+          Visualizza Ricette
+        </button>
       </section>
 
-      {/* Sezione Caratteristiche */}
-      <section id="features" className="features-section container mt-5">
-        <h2>Caratteristiche</h2>
-        <p>Descrivi qui le funzionalità principali del sistema, come la gestione in tempo reale, la conversione in formato proprietario, ecc.</p>
+      <section id="machines" className="machines-section container mt-5">
+        <h2>Macchine Lavatrici</h2>
+        <ul className="list-group">
+          {/* Esempio statico */}
+          <li className="list-group-item d-flex justify-content-between align-items-center">
+            Macchina 1
+            <span className="text-success">&#10004;</span>
+          </li>
+          <li className="list-group-item d-flex justify-content-between align-items-center">
+            Macchina 2
+            <span className="text-danger">&#10008;</span>
+          </li>
+        </ul>
       </section>
 
-      {/* Sezione Contatti */}
-      <section id="contact" className="contact-section container mt-5">
-        <h2>Contatti</h2>
-        <p>Inserisci qui le informazioni per contattare il supporto o per richiedere maggiori informazioni.</p>
-      </section>
-
-      {/* Footer */}
       <footer className="text-center py-3 mt-5 bg-light">
         <p>&copy; 2025 LavaManager. Tutti i diritti riservati.</p>
       </footer>

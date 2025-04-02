@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import '../App.css';
 
-// Parametri di default per ciascun tipo di passo
 const defaultParameters = {
   riempimento: { litri: 0, acqua: 'fredda' },
   rotazione: { giri: 0, tempoPausa: 0, velocita: 0 },
@@ -11,7 +10,6 @@ const defaultParameters = {
   centrifuga: { velocita: 0, durata: 0 },
 };
 
-// Tipologie di passi e label per la toolbar
 const stepTypes = [
   { type: 'riempimento', label: 'Riempimento' },
   { type: 'rotazione', label: 'Rotazione' },
@@ -135,7 +133,6 @@ function ProgramEditor({ initialRecipe }) {
   const [editingStep, setEditingStep] = useState(null);
   const [insertIndex, setInsertIndex] = useState(null);
 
-  // Aggiorna lo state se viene caricata una nuova ricetta
   useEffect(() => {
     if (initialRecipe) {
       setSteps(initialRecipe.steps || []);
@@ -162,7 +159,6 @@ function ProgramEditor({ initialRecipe }) {
     setSteps(steps.map((step, i) => (i === index ? updatedStep : step)));
   };
 
-  // Salva il programma: se esiste un ID, aggiorna (PUT); altrimenti, crea (POST)
   const saveProgram = () => {
     const programData = {
       name: recipeName || 'Programma di esempio',
@@ -226,15 +222,9 @@ function ProgramEditor({ initialRecipe }) {
                 {index + 1}. <strong>{step.type}</strong>
               </div>
               <div>
-                <button onClick={() => setEditingStep({ ...step, index })}>
-                  Modifica
-                </button>
-                <button onClick={() => deleteStep(index)}>
-                  Elimina
-                </button>
-                <button onClick={() => setInsertIndex(index)}>
-                  Inserisci prima
-                </button>
+                <button onClick={() => setEditingStep({ ...step, index })}>Modifica</button>
+                <button onClick={() => deleteStep(index)}>Elimina</button>
+                <button onClick={() => setInsertIndex(index)}>Inserisci prima</button>
               </div>
             </div>
             <div className="step-parameters">

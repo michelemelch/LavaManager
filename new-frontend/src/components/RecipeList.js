@@ -1,28 +1,23 @@
 import React, { useEffect, useState } from 'react';
+import NavBar from './NavBar';
 import '../App.css';
 
-function RecipeList({ onLoadRecipe }) {
+function RecipeList({ onLoadRecipe, onNavigate }) {
   const [recipes, setRecipes] = useState([]);
   const [renamingRecipe, setRenamingRecipe] = useState(null);
   const [newName, setNewName] = useState("");
 
-  // Carica le ricette dal backend all'avvio
   useEffect(() => {
     fetch('http://localhost:5001/api/program')
       .then((res) => res.json())
-      .then((data) => {
-        setRecipes(data);
-      })
+      .then((data) => setRecipes(data))
       .catch((err) => console.error("Errore nel caricamento delle ricette", err));
   }, []);
 
- // Funzione per creare una nuova ricetta vuota
- const createNewRecipe = () => {
-    // Passa una ricetta vuota all'editor: nome vuoto e nessun passo
+  const createNewRecipe = () => {
     onLoadRecipe({ name: '', steps: [] });
   };
 
-  // Eliminazione di una ricetta
   const deleteRecipe = (id) => {
     if (window.confirm("Sei sicuro di voler eliminare questa ricetta?")) {
       fetch(`http://localhost:5001/api/program/${id}`, { method: 'DELETE' })
@@ -35,10 +30,8 @@ function RecipeList({ onLoadRecipe }) {
     }
   };
 
-  // Duplicazione di una ricetta
   const duplicateRecipe = (recipe) => {
     const duplicateData = { ...recipe, name: `Copia di ${recipe.name}` };
-    // Rimuovo l'id per creare un nuovo record
     delete duplicateData.id;
     fetch('http://localhost:5001/api/program', {
       method: 'POST',
@@ -50,13 +43,11 @@ function RecipeList({ onLoadRecipe }) {
       .catch((err) => console.error("Errore nella duplicazione", err));
   };
 
-  // Avvia il processo di rinominazione
   const startRenaming = (recipe) => {
     setRenamingRecipe(recipe);
     setNewName(recipe.name);
   };
 
-  // Rinomina la ricetta
   const renameRecipe = () => {
     if (renamingRecipe && newName.trim() !== "") {
       fetch(`http://localhost:5001/api/program/${renamingRecipe.id}`, {
@@ -74,7 +65,6 @@ function RecipeList({ onLoadRecipe }) {
     }
   };
 
-  // Carica la ricetta completa con i passi per l'editor
   const loadFullRecipe = (id) => {
     fetch(`http://localhost:5001/api/program/${id}`)
       .then((res) => res.json())
@@ -83,9 +73,10 @@ function RecipeList({ onLoadRecipe }) {
   };
 
   return (
+    <div>
+    <NavBar onNavigate={onNavigate} /> 
     <div className="recipe-list-container">
       <h2>Elenco delle Ricette</h2>
-      {/* Pulsante per creare una nuova ricetta */}
       <button onClick={createNewRecipe} style={{ marginBottom: '1rem' }}>
         Nuova Ricetta
       </button>
@@ -116,8 +107,6 @@ function RecipeList({ onLoadRecipe }) {
           </tbody>
         </table>
       )}
-
-      {/* Modal per la rinominazione */}
       {renamingRecipe && (
         <div className="modal">
           <div className="modal-content">
@@ -136,6 +125,7 @@ function RecipeList({ onLoadRecipe }) {
           </div>
         </div>
       )}
+    </div>
     </div>
   );
 }
