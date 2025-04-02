@@ -1,0 +1,15 @@
+// _typography.scss
+// Stili di base per i testi e la tipografia
+h1, h2, h3, h4, h5, h6 {
+    color: #333;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+  
+  p {
+    color: #555;
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+  }
+  

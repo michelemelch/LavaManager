@@ -1,0 +1,43 @@
+// landing.scss
+// Stili specifici per la landing page
+
+.navbar-custom {
+    background-color: $primary-color;
+    
+    .navbar-brand {
+      color: #fff;
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+    
+    .nav-link {
+      color: #fff;
+      &:hover {
+        color: #ddd;
+      }
+    }
+  }
+  
+  .landing-section {
+    padding: 4rem 0;
+    text-align: center;
+    
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+    
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+    }
+  }
+  
+  .features-section, .contact-section {
+    padding: 2rem 0;
+  }
+  
+  footer {
+    background-color: #f8f9fa;
+  }
+  

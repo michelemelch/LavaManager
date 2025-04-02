@@ -1,0 +1,53 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #f4f7f8;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #333;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+p {
+  color: #555;
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+.navbar-custom {
+  background-color: #0b7dda;
+  padding: 1rem;
+}
+.navbar-custom .navbar-brand {
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+.navbar-custom ul {
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+  margin: 0;
+  padding: 0;
+}
+.navbar-custom ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.1rem;
+  padding: 0.5rem 1rem;
+  transition: background-color 0.3s;
+}
+.navbar-custom ul li a:hover {
+  background-color: rgb(36.0480349345, 150.5458515284, 243.9519650655);
+  border-radius: 4px;
+}
+
+/*# sourceMappingURL=main.css.map */

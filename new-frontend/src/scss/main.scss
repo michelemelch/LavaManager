@@ -1,0 +1,11 @@
+// main.scss
+// File principale che importa tutti gli altri file SCSS
+
+@import 'abstracts/variables';
+@import 'base/reset';
+@import 'base/typography';
+@import 'components/menu';
+
+// Se hai creato file specifici per layout o per la landing page, li puoi importare qui:
+// @import 'layout/header';
+// @import 'landing';

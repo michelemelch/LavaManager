@@ -131,6 +131,7 @@ app.put('/api/program/:id', async (req, res) => {
     return res.status(400).json({ error: 'Input non valido: assicurati di avere un nome e una lista di passi.' });
   }
   
+  /* --------*/
   try {
     await pool.query('BEGIN');
     // Aggiorna il nome della ricetta
