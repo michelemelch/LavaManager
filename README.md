@@ -6,13 +6,13 @@ basata su tecnologie web (browser + backend in JavaScript o Python + PostgreSQL)
 Componenti principali
 Frontend (Browser):
 Un'applicazione Single Page Application (SPA) realizzata con un framework moderno (ad esempio, React, Vue.js o Angular).
-Responsabilità: Presentare l'interfaccia utente, gestire il routing client-side, comunicare con il backend via API RESTful (o eventualmente GraphQL), gestire lo stato locale e globale.
+req1: Presentare l'interfaccia utente, gestire il routing client-side, comunicare con il backend via API RESTful (o eventualmente GraphQL), gestire lo stato locale e globale.
 Backend (Server API):
 Realizzato in JavaScript (con Node.js/Express oppure con altri framework come Koa) o in Python (utilizzando Flask, Django o FastAPI).
-Responsabilità: Gestire la logica di business, esporre endpoint per operazioni CRUD (e altre operazioni specifiche), interfacciarsi con il database e implementare sicurezza e autenticazione.
+req2: Gestire la logica di business, esporre endpoint per operazioni CRUD (e altre operazioni specifiche), interfacciarsi con il database e implementare sicurezza e autenticazione.
 Database (PostgreSQL):
 Il database relazionale per la gestione persistente dei dati.
-Responsabilità: Conservare le informazioni relative alle “ricette” (e altri eventuali dati correlati come utenti, log, ecc.) e garantire integrità e performance.
+req3: Conservare le informazioni relative alle “ricette” (e altri eventuali dati correlati come utenti, log, ecc.) e garantire integrità e performance.
 Infrastruttura e DevOps:
 Contenitori: Utilizzo di Docker per containerizzare le varie componenti (frontend, backend, database).
 Orchestrazione: Utilizzo di docker-compose per facilitare il setup in ambiente di sviluppo e staging.
@@ -21,7 +21,7 @@ CI/CD: Possibile integrazione con pipeline di Continuous Integration e Continuou
 2. Struttura dei Sistemi di Sviluppo
 
 A. Frontend
-Tecnologie consigliate:
+Tecnologie:
 
 Framework/Libreria: React, Vue.js o Angular.
 Gestione dello stato: Redux (React), Vuex (Vue.js) o NgRx (Angular) (se necessario).
@@ -45,7 +45,7 @@ frontend/
 ├── package.json           # Gestione dipendenze e script (npm o yarn)
 └── .env                 # Variabili d'ambiente (es. API endpoint)
 B. Backend
-Potrai scegliere tra JavaScript (Node.js) o Python in base alle tue preferenze. Di seguito trovi due possibili strutture:
+ JavaScript (Node.js) o Python. Di seguito due possibili strutture:
 
 Opzione 1: Backend in Node.js con Express
 
@@ -78,6 +78,7 @@ backend/
 ├── run.py                 # File principale per l’avvio dell’applicazione
 ├── requirements.txt       # Dipendenze Python
 └── .env                 # Variabili d’ambiente (configurazioni DB, porte, etc.)
+
 C. Database (PostgreSQL)
 Struttura e gestione:
 
@@ -90,6 +91,7 @@ database/
 ├── migrations/          # Script per gestire l’evoluzione dello schema
 ├── seeders/             # Script per il popolamento iniziale del database
 └── schema.sql           # (Opzionale) Script SQL completo per la creazione dello schema
+
 3. Integrazione e Comunicazione
 
 Comunicazione tra Frontend e Backend:
@@ -134,23 +136,24 @@ volumes:
   pgdata:
 Testing e CI/CD:
 Configurare script di test (es. Jest per il frontend, Mocha/Chai per Node.js oppure PyTest per Python) e pipeline CI/CD per automatizzare build, test e deployment.
+
 4. Processo di Sviluppo
 
 Definizione dei Requisiti:
 Attendere la definizione dettagliata delle funzionalità e del data model (che includerà le tabelle e i campi specifici per le ricette e altri dati).
+
 Prototipazione:
 Sviluppare una versione MVP del frontend e del backend per validare flusso e interazione utente.
 Sviluppo Iterativo:
 Lavorare in cicli iterativi (sprint) per aggiungere funzionalità, testare e integrare i vari componenti.
+
 Deployment e Monitoraggio:
 Configurare ambienti di staging e produzione, monitorare le performance e la sicurezza dell’applicazione.
 Questa struttura è una base flessibile che potrà essere ampliata e adattata in base alle specifiche funzionali che mi fornirai successivamente (ad es. funzioni dell’editor, dettagli del data model, logiche di validazione, ecc.).
 
-Quando sarai pronto con le specifiche, potremo approfondire la definizione degli endpoint, delle logiche di business e del data model su PostgreSQL.
 
 
-
-Di seguito trovi una guida passo passo per creare un’applicazione “Hello World” che integri:
+Di seguito un’applicazione “Hello World” che integri:
 
 Frontend: Un’app React (SPA)
 Backend: Un’app Node.js con Express
@@ -201,11 +204,11 @@ function App() {
 }
 
 export default App;
-Suggerimento: In fase di sviluppo potresti configurare il proxy in frontend/package.json per evitare problemi di CORS (aggiungendo "proxy": "http://localhost:5000",), ma qui nel nostro esempio il backend ha già un middleware per il CORS.
+Suggerimento: In fase di sviluppo configurare il proxy in frontend/package.json per evitare problemi di CORS (aggiungendo "proxy": "http://localhost:5000",), ma qui il backend ha già un middleware per il CORS.
 3. Creare il Backend (Node.js + Express)
 
 3.1. Inizializza il progetto Node.js
-Accedi alla cartella backend:
+cartella backend:
 
 cd backend
 npm init -y
@@ -247,14 +250,14 @@ Nel file backend/package.json aggiungi (o modifica) uno script per avviare l’a
 Per avviare il backend in sviluppo, puoi eseguire:
 
 npm run dev
+
 4. Creare i Dockerfile
 
 4.1. Dockerfile per il Backend
 Crea un file chiamato Dockerfile all’interno della cartella backend con il seguente contenuto:
 
 # Usa un’immagine ufficiale Node.js
-FROM node:14
-
+FROM node:19
 # Imposta la cartella di lavoro
 WORKDIR /app
 

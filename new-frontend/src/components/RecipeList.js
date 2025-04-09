@@ -31,7 +31,7 @@ function RecipeList({ onLoadRecipe, onNavigate }) {
   };
 
   const duplicateRecipe = (recipe) => {
-    const duplicateData = { ...recipe, name: `Copia di ${recipe.name}` };
+    const duplicateData = { ...recipe, name: `Copia di ${recipe.recipe_name}` };
     delete duplicateData.id;
     fetch('http://localhost:5001/api/program', {
       method: 'POST',
@@ -45,7 +45,7 @@ function RecipeList({ onLoadRecipe, onNavigate }) {
 
   const startRenaming = (recipe) => {
     setRenamingRecipe(recipe);
-    setNewName(recipe.name);
+    setNewName(recipe.recipe_name);
   };
 
   const renameRecipe = () => {
@@ -94,7 +94,7 @@ function RecipeList({ onLoadRecipe, onNavigate }) {
           <tbody>
             {recipes.map((recipe) => (
               <tr key={recipe.id}>
-                <td>{recipe.name}</td>
+                <td>{recipe.recipe_name}</td>
                 <td>{new Date(recipe.created_at).toLocaleString()}</td>
                 <td>
                   <button onClick={() => loadFullRecipe(recipe.id)}>Carica/Modifica</button>

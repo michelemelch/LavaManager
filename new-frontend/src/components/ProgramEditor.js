@@ -128,84 +128,133 @@ function InsertStepModal({ onInsert, onCancel }) {
 }
 
 function ProgramEditor({ initialRecipe }) {
-  const [steps, setSteps] = useState(initialRecipe ? initialRecipe.steps : []);
-  const [recipeName, setRecipeName] = useState(initialRecipe ? initialRecipe.name : '');
-  const [editingStep, setEditingStep] = useState(null);
-  const [insertIndex, setInsertIndex] = useState(null);
-
-  useEffect(() => {
-    if (initialRecipe) {
-      setSteps(initialRecipe.steps || []);
-      setRecipeName(initialRecipe.name || '');
-    }
-  }, [initialRecipe]);
-
-  const addStep = (stepType, index = steps.length) => {
-    const newStep = {
-      id: Date.now(),
-      type: stepType,
-      parameters: { ...defaultParameters[stepType] },
+    // Nuovi state per i campi del data model
+    const [colore, setColore] = useState(initialRecipe ? initialRecipe.colore : '');
+    const [fase, setFase] = useState(initialRecipe ? initialRecipe.fase : '');
+    const [disposizione, setDisposizione] = useState(initialRecipe ? initialRecipe.disposizione : 'GEN');
+    
+    // State per i passi della ricetta
+    const [steps, setSteps] = useState(initialRecipe ? initialRecipe.steps : []);
+  
+    // Per altri campi non presenti nel data model originario
+    // (Il campo recipe_name verrà generato dal db se usi una generated column)
+    
+    const [editingStep, setEditingStep] = useState(null);
+    const [insertIndex, setInsertIndex] = useState(null);
+  
+    useEffect(() => {
+      if (initialRecipe) {
+        setColore(initialRecipe.colore || '');
+        setFase(initialRecipe.fase || '');
+        setDisposizione(initialRecipe.disposizione || 'GEN');
+        setSteps(initialRecipe.steps || []);
+      }
+    }, [initialRecipe]);
+  
+    const addStep = (stepType, index = steps.length) => {
+      const newStep = {
+        id: Date.now(),
+        type: stepType,
+        parameters: { ...defaultParameters[stepType] },
+      };
+      const newSteps = [...steps];
+      newSteps.splice(index, 0, newStep);
+      setSteps(newSteps);
     };
-    const newSteps = [...steps];
-    newSteps.splice(index, 0, newStep);
-    setSteps(newSteps);
-  };
-
-  const deleteStep = (index) => {
-    setSteps(steps.filter((_, i) => i !== index));
-  };
-
-  const updateStep = (index, updatedStep) => {
-    setSteps(steps.map((step, i) => (i === index ? updatedStep : step)));
-  };
-
-  const saveProgram = () => {
-    const programData = {
-      name: recipeName || 'Programma di esempio',
-      steps,
+  
+    const deleteStep = (index) => {
+      setSteps(steps.filter((_, i) => i !== index));
     };
+  
+    const updateStep = (index, updatedStep) => {
+      setSteps(steps.map((step, i) => (i === index ? updatedStep : step)));
+    };
+  
+    // Aggiorna o crea la ricetta, includendo i nuovi campi (colore, fase, disposizione)
+    const saveProgram = () => {
+      const programData = {
+        colore,
+        fase,
+        disposizione,
+        steps,
+      };
+  
+      if (initialRecipe && initialRecipe.id) {
+        // Aggiorna il programma esistente
+        fetch(`http://localhost:5001/api/program/${initialRecipe.id}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(programData),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log('Programma aggiornato con ID:', data.id);
+            alert('Programma aggiornato con successo!');
+          })
+          .catch((err) => console.error("Errore nell'aggiornamento:", err));
+      } else {
+        // Crea un nuovo programma
+        fetch('http://localhost:5001/api/program', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(programData),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log('Programma creato con ID:', data.id);
+            alert('Programma salvato con successo!');
+          })
+          .catch((err) => console.error("Errore nel salvataggio:", err));
+      }
+    };
+  
 
-    if (initialRecipe && initialRecipe.id) {
-      // Aggiorna il programma esistente
-      fetch(`http://localhost:5001/api/program/${initialRecipe.id}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(programData),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          console.log('Programma aggiornato con ID:', data.id);
-          alert('Programma aggiornato con successo!');
-        })
-        .catch((err) => console.error("Errore nell'aggiornamento:", err));
-    } else {
-      // Crea un nuovo programma
-      fetch('http://localhost:5001/api/program', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(programData),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          console.log('Programma creato con ID:', data.id);
-          alert('Programma salvato con successo!');
-        })
-        .catch((err) => console.error("Errore nel salvataggio:", err));
-    }
-  };
+    // Funzione per esportare la ricetta in formato JSON
+    const exportRecipe = () => {
+        if (initialRecipe && initialRecipe.id) {
+          // Imposta il browser per scaricare il file JSON
+          window.location.href = `http://localhost:5001/api/program/${initialRecipe.id}/export`;
+        } else {
+          alert("Salva la ricetta prima di esportarla.");
+        }
+      };
 
   return (
     <div className="program-editor-container">
       <h2>Editor del Programma di Lavaggio</h2>
+
+      {/* Form per inserire i nuovi campi */}
       <div className="program-header">
-        <label>Nome Programma: </label>
-        <input 
-          type="text" 
-          value={recipeName} 
-          onChange={(e) => setRecipeName(e.target.value)} 
-          placeholder="Inserisci il nome della ricetta" 
-        />
+        <div>
+          <label>Colore:</label>
+          <input
+            type="text"
+            value={colore}
+            onChange={(e) => setColore(e.target.value)}
+            placeholder="Inserisci il colore"
+          />
+        </div>
+        <div>
+          <label>Fase:</label>
+          <input
+            type="text"
+            value={fase}
+            onChange={(e) => setFase(e.target.value)}
+            placeholder="Inserisci la fase"
+          />
+        </div>
+        <div>
+          <label>Disposizione:</label>
+          <input
+            type="text"
+            value={disposizione}
+            onChange={(e) => setDisposizione(e.target.value)}
+            placeholder="Inserisci la disposizione (default GEN)"
+          />
+        </div>
       </div>
+
+
       <div className="toolbar">
         {stepTypes.map((s) => (
           <button key={s.type} onClick={() => addStep(s.type)}>
@@ -239,6 +288,7 @@ function ProgramEditor({ initialRecipe }) {
       </div>
       <div className="program-actions">
         <button onClick={saveProgram}>Salva Programma</button>
+        <button onClick={exportRecipe}>Esporta in JSON</button>
       </div>
       {editingStep && (
         <StepEditor
